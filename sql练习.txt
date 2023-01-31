@@ -1,0 +1,165 @@
+
+
+create table wangzhe1(id int,uid int unsigned, zid int(5) zerofill)default charset=utf8;
+insert into wangzhe1(id,uid,zid) vaules(1,2,3);
+select * from wangzhe1;
+show tables;
+
+primary key
+不允许为空
+
+tinyint
+有符合,取值范围: -128~127
+无符号,取值范围:0 ~ 255
+bigint
+有符合,取值范围: -9223372036854775808 ~ 9223372036854775807
+无符号,取值范围:0 ~ 18446744073709551615
+
+
+create table wangzhe2(id int not null primary key
+	auto_increment, salary decimal(8,2)
+	)default charset=utf8;
+
+insert into wangzhe2(salary) values(5.4);
+
+clear
+
+drop table wangzhe1;
+
+truncote table wangzhe1;
+
+
+alter table wangzhe2 add pag varchar(20);
+
+alter table wangzhe2 drop column pag;
+chenge
+alter table wangzhe2 change age gage char(12);
+
+select ename,hiredate from emp order by hiredate desc limit 5;
+
+select id from wangzhe2;
+
+create table wangzhe4(
+	id int not null primary key,
+	age char(2),
+	page varchar(12)
+	);
+
+insert into wangzhe4(id,age,page) values(5,456,'变定长');
+
+insert into wangzhe1(id,namea,email,age,pwd) values(1,'小明',1262810487@123.com,24,'看书');
+
+create table wangzhe3(
+	id int not null primary key,
+	auto_increment,
+	age char(5),
+	page varchar(12)
+	);
+
+create table wangzhe3(
+	id int not null primary key auto_increment,
+	dt datetime,
+	tt timestamp
+	)default charset=utf8;
+
+show tables;
+desc wangzhe3;
+
+insert into wangzhe3(dt,tt) values("2022-12-29 9:35:45","202212-29 9:36:24");
+select * from wangzhe3;
+
+drop database wangzhe2;
+
+insert into wangzhe1(name,password) values('小明','123123'),('alex','123');
+#insert into wangzhe1 values('小红','123123'),('alex','123');
+
+#删除表内容
+delete from wangzhe1;
+delete from wangzhe1 where id>4;
+delete from wangzhe1 where id=2;
+
+update wangzhe1 set name=concat(name,'123') where id=2;
+
+update wangzhe4 set page='123122' where id=1;
+# 切记带where
+
+select id,age,page,111 from wangzhe4;
+insert into wangzhe1(id,dt) values(5,'2022-12-31 9:50:25'), ('alex','123')
+
+create table t1(
+     id int not null primary key auto_increment,
+     name varchar(32) not null,
+     password varchar(64) not null,
+     gender char(1) not null,
+     email varchar(64),
+     amount decimal(8,2) not null,
+     ctime datetime)default charset=utf8;
+
+insert into t1(id,name,password,gender,email,amount,ctime) values(1,'小明','132452','男','123@qq.com',4231.12,'2022-12-31 15:00:25');
+insert into t1(id,name,password,gender,email,amount,ctime) values(2,'小青','132453','男','124@qq.com',4231.13,'2022-12-31 15:01:25');
+insert into t1(id,name,password,gender,email,amount,ctime) values(3,'小兰','132454','女','125@qq.com',4231.14,'2022-12-31 15:02:25');
+insert into t1(id,name,password,gender,email,amount,ctime) values(4,'小雨','132455','男','126@qq.com',4231.15,'2022-12-31 15:03:25');
+insert into t1(id,name,password,gender,email,amount,ctime) values(5,'小红','132456','男','127@qq.com',4231.16,'2022-12-31 15:04:25');
+update t1 set gender='男' where id >= 3;
+
+select * from wangzhe1 id = 1;
+select * from wangzhe1 id >= 1;
+select * from wangzhe1 id != 1;
+
+select * from wangzhe1 where id 列名 2 and 4;
+select * from wangzhe where (name='小明' or email='pyyu@live.com') and age=49;
+
+select * from wangzhe1 where id in(select id from depart);
+
+select * from wangzhe1 where not exists (select * from depart where id=5);
+
+select * from (select * from wangzhe1 id>5) as T where T.age > 10;
+select * from t1 where not exists (select * from t1 where id=7);
+
+select age,max(id),min(id),count(id),sum(id),avg(id) from wangzhe1 group by age;
+select age,count(1) from wangzhe1 group by age;
+
+select * from wangzhe1 where id in (select max(id) from wangzhe1 group by age);
+select age,count(id) from wangzhe1 group by age having count(id) > 2;
+
+select age,count(id) from wangzhe1 id > 4 group by age having count(id) > 2;
+
+sql = """insert into wangzhe1(id,name,address) values('10','panpan','广州')"""
+select * from wangzhe1 where id between 2 and 4；
+select * from t1 where not exists(select * from wangzhe1 where id=6);
+select * from wangzhe1 where (name='李杰' or email='pyyu@live.com') and age=49;
+select * from t1 where (name='小雨' or email='pyyu@live.com') and amount=5231.15;
+
+insert into t1(id,name,password,gender,email,amount,ctime) values(1,'小明',132452,'男','123@qq.com',5231.12,'2022-12-31 14:50:35');
+select amount,max(id),min(id),count(id),sum(id),avg(id) from t1 group by amount;
+select * from (select * from t1 where id>3) as T where password>132452;
+select id,name,as age,123 from info;
+
+select
+	id,
+	name,
+	case depart_id when 1 then "第1部门" end v1,
+	case depart_id when 1 then "第1部门" else "其他" end v2,
+	case depart_id when 1 then "第1部门" when 2 then "第2部门" else "其他" end v3,
+	case when age<18 then "少年" end v4,
+	case when age<28 then "少年" else "油腻男" end v5,
+	case when age<18 then "少年" when age<30 then "青年" else "油腻男" end v6
+	from info;
+
+select * from wangzhe1 order by age desc;
+select * from wangzhe1 order by age asc;
+select * from wangzhe1 order by age asc,id desc;
+select * from wangzhe1 where id > 4 order by id desc limit 3;
+
+select * from wangzhe1 limit 10 offset 0;
+select * from wangzhe1 limit 10 offset 10;
+select * from wangzhe1 limit 10 offset 20;
+
+
+
+
+
+
+
+
+
