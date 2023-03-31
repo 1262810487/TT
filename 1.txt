@@ -1,0 +1,8 @@
+create table t8(
+	id int not null primary key,
+	age char(5),
+	ji_n varchar(15),
+	gr_n int not null
+	mo_n tinyint,
+	no_n varchar(13)
+)engine=InnoDB default charset=utf8;
