@@ -1,4 +1,0 @@
-T1
-你好
-python3
-linux
